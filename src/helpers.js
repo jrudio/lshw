@@ -1,4 +1,5 @@
 const os = require('os');
+const systemInfo = require('systeminformation');
 
 // credit to stackoverflow for this conversion :D
 // https://stackoverflow.com/a/33837719
@@ -58,11 +59,46 @@ module.exports.convertToGhz = (n = 0) => {
 };
 
 module.exports.getStorageDevices = () => {
+  return systemInfo.diskLayout().then(diskLayoutDevices => {
+    const storageDevices = [];
 
+    for (let i = 0; i < diskLayoutDevices.length; i++) {
+      let d = diskLayoutDevices[i];
+
+      storageDevices.push(
+        {
+          name: d.name,
+          total: convertToGB(parseInt(d.size)),
+          available: 0, // couldn't figure out how to get??
+          type: d.type
+        }
+      );
+    }
+
+    return storageDevices;
+  });
 };
 
 module.exports.getNetworkInterfaces = () => {
+  let interfaces = os.networkInterfaces();
 
+  let formattedInterfaces = [];
+
+  for (let interface in interfaces) {
+    for (let i = 0; i < interfaces[interface].length; i++) {
+      let element = interfaces[interface][i];
+
+      if (element.family === 'IPv4') {
+        formattedInterfaces.push({
+          name: interface,
+          ip: element.address,
+          netmask: element.netmask
+        });
+      }
+    }
+  }
+
+  return formattedInterfaces;
 };
 
 module.exports.getMemory = () => {

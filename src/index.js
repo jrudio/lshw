@@ -29,29 +29,57 @@ const getMachineDataAndSave = (outputPath = '') => {
     AvailableGB: mem.available
   });
 
-  console.log(memory);
-    // // format into expected output
-    // .then(data => {
-    //   console.log(data);
-    //   machineData.push(data)
+  getStorageDevices().then(devices => {
+    return devices.map(device => ({
+      Description: device.name,
+      CapacityGB: device.total,
+      AvailableGB: device.available,
+      Type: device.type,
+    }));
+  })
+  .then(storageDevices => {
 
-    //   return machineData;
-    // })
-    // .then(allMachineData => {
-    //   // turn into JSON
-    //   let output = null;
+    console.log(storageDevices);
+  })
+  .then(storageDevices => {
+    const interfaces = getNetworkInterfaces();
 
-    //   try {
-    //     output = JSON.stringify(allMachineData, null, '\t');
-    //   } catch (err) {
-    //     throw err;
-    //   }
+    let formattedInterfaces = [];
 
-    //   return output;
-    // })
-    // // write to disk as machinedata.json
-    // .then(allMachineDataStr => fs.writeFileSync(outputPath, allMachineDataStr))
-    // .catch(err => console.log(`getting machine data and saving failed: ${err}`));
+    for (let i = 0; i < interfaces.length; i++) {
+      let interface = interfaces[i];
+
+      formattedInterfaces.push({
+        Description: interface.name,
+        IP: interface.ip,
+        Netmask: interface.netmask
+      });
+    }
+
+    machineData.push({
+      CPUs: cpus,
+      Memory: memory,
+      Storage: storageDevices,
+      Network: formattedInterfaces
+    });
+
+    return machineData;
+  })
+  .then(allMachineData => {
+    // turn into JSON
+    let output = null;
+
+    try {
+      output = JSON.stringify(allMachineData, null, '\t');
+    } catch (err) {
+      throw err;
+    }
+
+    return output;
+  })
+  // write to disk as machinedata.json
+  .then(allMachineDataStr => fs.writeFileSync(outputPath, allMachineDataStr))
+  .catch(err => console.log(`getting machine data and saving failed: ${err}`));
 };
 
 const outputPath = path.join(__dirname, 'machinedata.json');
