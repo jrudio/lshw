@@ -78,6 +78,6 @@ const getMachineDataAndSave = (outputPath = '') => {
   .catch(err => console.log(`getting machine data and saving failed: ${err}`));
 };
 
-const outputPath = path.join(__dirname, 'machinedata.json');
+const outputPath = path.join('.', 'machinedata.json');
 
 getMachineDataAndSave(outputPath);

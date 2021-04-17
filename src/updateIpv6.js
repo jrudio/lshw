@@ -83,7 +83,7 @@ const updateIpv6 = (inputPath, outputPath = '') => {
   console.log(`wrote updated machine data to ${outputPath}`);
 };
 
-const inputPath = path.join(__dirname, 'machinedata.json');
-const outputPath = path.join(__dirname, 'machinedata-2.json');
+const inputPath = path.join('.', 'machinedata.json');
+const outputPath = path.join('.', 'machinedata-2.json');
 
 updateIpv6(inputPath, outputPath);
