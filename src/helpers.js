@@ -67,7 +67,7 @@ module.exports.getStorageDevices = () => {
 
       storageDevices.push(
         {
-          name: d.name,
+          name: d.name.trim(),
           total: convertToGB(parseInt(d.size)),
           available: 0, // couldn't figure out how to get??
           type: d.type

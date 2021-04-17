@@ -38,10 +38,6 @@ const getMachineDataAndSave = (outputPath = '') => {
     }));
   })
   .then(storageDevices => {
-
-    console.log(storageDevices);
-  })
-  .then(storageDevices => {
     const interfaces = getNetworkInterfaces();
 
     let formattedInterfaces = [];
