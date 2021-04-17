@@ -21,7 +21,15 @@ const getMachineDataAndSave = (outputPath = '') => {
     NumberOfCores: cpu.cores
   }));
 
-  // console.log(cpus);
+  let memory = [];
+  let mem = getMemory();
+
+  memory.push({
+    InstalledGB: mem.total,
+    AvailableGB: mem.available
+  });
+
+  console.log(memory);
     // // format into expected output
     // .then(data => {
     //   console.log(data);
