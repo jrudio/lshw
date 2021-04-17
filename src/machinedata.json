@@ -1,0 +1,42 @@
+[
+	{
+		"CPUs": [
+			{
+				"Description": "AMD Ryzen 9 3900XT 12-Core Processor @ 3.79GHz",
+				"NumberOfCores": 24
+			}
+		],
+		"Memory": [
+			{
+				"InstalledGB": 12,
+				"AvailableGB": 9
+			}
+		],
+		"Storage": [
+			{
+				"Description": "Virtual Disk",
+				"CapacityGB": 256,
+				"AvailableGB": 0,
+				"Type": "HD"
+			},
+			{
+				"Description": "Virtual Disk",
+				"CapacityGB": 256,
+				"AvailableGB": 0,
+				"Type": "HD"
+			}
+		],
+		"Network": [
+			{
+				"Description": "lo",
+				"IP": "127.0.0.1",
+				"Netmask": "255.0.0.0"
+			},
+			{
+				"Description": "eth0",
+				"IP": "0.0.0.0",
+				"Netmask": "255.255.240.0"
+			}
+		]
+	}
+]
