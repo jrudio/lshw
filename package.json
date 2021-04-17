@@ -17,5 +17,6 @@
   "bugs": {
     "url": "https://github.com/jrudio/lshw/issues"
   },
-  "homepage": "https://github.com/jrudio/lshw#readme"
+  "homepage": "https://github.com/jrudio/lshw#readme",
+  "dependencies": {}
 }
